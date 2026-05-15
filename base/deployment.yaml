@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment 
 metadata:
-  name: myapp
+  name: keycloak
   namespace: keyclock-poc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myapp
+      app: keycloak
   template:
     metadata:
       labels:
-        app: myapp
+        app: keycloak
     spec:
       containers: 
-      - name: myapp
+      - name: keycloak
         image: nginx
         ports:
         - containerPort: 80
