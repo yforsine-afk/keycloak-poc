@@ -14,11 +14,15 @@ spec:
         app: postgres
     spec:
       securityContext:
-        fsGroup: 26   # ✅ สำคัญสำหรับ OpenShift
+        runAsUser: 26
+        fsGroup: 26
 
       containers:
         - name: postgres
-          image: registry.redhat.io/rhel8/postgresql-15
+          image: registry.redhat.io/rhel8/postgresql-15:latest
+
+          ports:
+            - containerPort: 5432
 
           env:
             - name: POSTGRESQL_DATABASE
@@ -35,9 +39,6 @@ spec:
                 secretKeyRef:
                   name: keycloak-secret
                   key: POSTGRES_PASSWORD
-
-          ports:
-            - containerPort: 5432
 
           volumeMounts:
             - name: data
